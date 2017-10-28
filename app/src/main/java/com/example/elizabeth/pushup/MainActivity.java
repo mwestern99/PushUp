@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
     private void TestUpload()
     {
         int cunt = 1 + 1;
+
+        int cuntcunt = 2 + 2;
+
+        int paknysssss = cunt + cuntcunt;
     }
 
 
