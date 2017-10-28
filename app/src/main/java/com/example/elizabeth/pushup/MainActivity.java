@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         int paknysssss = cunt + cuntcunt;
 
-        int eric;
     }
 
 
