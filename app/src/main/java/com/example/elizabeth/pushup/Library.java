@@ -35,30 +35,24 @@ package com.example.angie.upload;
 public class Library extends Activity
 {
 
+   
+    List<AppFunction> FunctionList;
+    GridView gridView;
     ImageButton BlockPlayButton = null;
     MediaPlayer mediaPlayer;
     int RandomSong=0;
-    List<AppFunction> FunctionList;
-    GridView gridView;
-    int ClickSong=0;
-    //
-    ListAdapter adapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_library);
+        setContentView(R.layout.activity_main);
         gridView = (GridView) findViewById(R.id.grid);
         setData();
         setGridView();
         SongsList();
-
-
-
     }
-    /**设置数据*/
+
+    //set rollbar data
     private void setData()
     {
         FunctionList = new ArrayList<AppFunction>();
@@ -73,7 +67,7 @@ public class Library extends Activity
         FunctionList.add(function);
     }
 
-    /**设置GirdView参数，绑定数据*/
+    //set GridView Format data
     private void setGridView() {
         int size = FunctionList.size();
         int length = 130;
@@ -85,33 +79,17 @@ public class Library extends Activity
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 gridviewWidth, LinearLayout.LayoutParams.FILL_PARENT);
-        gridView.setLayoutParams(params); // 设置GirdView布局参数,横向布局的关键
-        gridView.setColumnWidth(itemWidth); // 设置列表项宽
-        gridView.setHorizontalSpacing(5); // 设置列表项水平间距
+        gridView.setLayoutParams(params); //set GirdView Layout
+        gridView.setColumnWidth(itemWidth); // set column width
+        gridView.setHorizontalSpacing(5); // set spacing
         gridView.setStretchMode(GridView.NO_STRETCH);
-        gridView.setNumColumns(size); // 设置列数量=列表集合数
+        gridView.setNumColumns(size); //set the num of column = the number of "function" number
 
         GridViewAdapter adapter = new GridViewAdapter(getApplicationContext(), FunctionList);
         gridView.setAdapter(adapter);
     }
 
-    public class AppFunction
-    {
-        private String FunctionName;
-
-        public String getFunctionName()
-        {
-            return FunctionName;
-        }
-
-        public void setFunctionName(String FunctionName)
-        {
-            this.FunctionName = FunctionName;
-        }
-
-    }
-
-    /**GirdView 数据适配器*/
+    //set GridView Adapter
     public class GridViewAdapter extends BaseAdapter {
         Context context;
         List<AppFunction> list;
@@ -141,7 +119,7 @@ public class Library extends Activity
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater layoutInflater = LayoutInflater.from(context);
-            convertView = layoutInflater.inflate(R.layout.list_item, null);
+            convertView = layoutInflater.inflate(R.layout.roll_list_item, null);
             TextView tvCity = (TextView) convertView.findViewById(R.id.function);
             AppFunction city = list.get(position);
 
@@ -150,8 +128,21 @@ public class Library extends Activity
         }
     }
 
+    public class AppFunction
+    {
+        private String FunctionName;
 
+        public String getFunctionName()
+        {
+            return FunctionName;
+        }
 
+        public void setFunctionName(String FunctionName)
+        {
+            this.FunctionName = FunctionName;
+        }
+
+    }
     public void SongsList()
     {
 
