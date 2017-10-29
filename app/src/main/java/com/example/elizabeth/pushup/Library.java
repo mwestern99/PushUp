@@ -1,41 +1,33 @@
-package com.example.angie.upload;
+package com.example.elizabeth.pushup;
 
+import android.content.Context;
+import android.media.MediaPlayer;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.content.Intent;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-        import android.media.MediaPlayer;
-        import android.os.Bundle;
-        import android.util.DisplayMetrics;
-        import android.view.LayoutInflater;
-        import android.view.MotionEvent;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.AdapterView;
-        import android.widget.ArrayAdapter;
-        import android.widget.BaseAdapter;
-        import android.widget.Button;
-        import android.widget.GridView;
-        import android.widget.ImageButton;
-        import android.widget.LinearLayout;
-        import android.widget.ListAdapter;
-        import android.widget.ListView;
-        import android.widget.TextView;
+import static com.example.elizabeth.pushup.R.id.BlockView;
+import static com.example.elizabeth.pushup.R.id.MusicListView;
 
-        import java.lang.reflect.Field;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Random;
-
-        import static com.example.angie.upload.R.id.BlockView;
-        import static com.example.angie.upload.R.id.MusicListView;
-        import static com.example.angie.upload.R.id.list_item;
-
-public class Library extends Activity
+public class Library extends AppCompatActivity
 {
 
-   
     List<AppFunction> FunctionList;
     GridView gridView;
     ImageButton BlockPlayButton = null;
@@ -45,7 +37,7 @@ public class Library extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_library);
         gridView = (GridView) findViewById(R.id.grid);
         setData();
         setGridView();
@@ -143,13 +135,16 @@ public class Library extends Activity
         }
 
     }
+
+
     public void SongsList()
     {
 
         ListView list =(ListView) findViewById(MusicListView);
-        final ArrayList<String> musicList = new ArrayList<>();
-        final Field[] fields = R.raw.class.getFields();
 
+        final ArrayList<String> musicList = new ArrayList<>();
+
+        final Field[] fields = R.raw.class.getFields();
 
         for(int i = 0;i<fields.length;i++)
         {
@@ -166,7 +161,6 @@ public class Library extends Activity
 
         String sblockInfo;
         Random rnd = new Random();
-
         while (RandomSong==0||RandomSong==1)
         {
             RandomSong=rnd.nextInt(fields.length);
@@ -174,6 +168,7 @@ public class Library extends Activity
         sblockInfo=fields[RandomSong].getName();
         TextView blockInfo =(TextView) findViewById(BlockView);
         blockInfo.setText(sblockInfo);
+
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -186,31 +181,20 @@ public class Library extends Activity
             }
         });
 
-
-
-
         BlockPlayButton = (ImageButton) findViewById(R.id.BPlayButton);
         BlockPlayButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                int BlockSongID=getResources().getIdentifier(musicList.get(RandomSong),"raw",getPackageName());
-                mediaPlayer=MediaPlayer.create(Library.this,BlockSongID);
+
+                int resID=getResources().getIdentifier(musicList.get(RandomSong),"raw",getPackageName());
+                mediaPlayer= MediaPlayer.create(Library.this,resID);
                 mediaPlayer.start();
             }
         });
 
-
-
     }
 
 
-
-
-
-
-
-
 }
-
