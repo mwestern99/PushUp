@@ -40,13 +40,17 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.item1) {
+        if (id == R.id.item1) 
+        {
 
             Intent intent = new Intent(this, Recommended.class);
             startActivity(intent);
-
-
-
+            return true;
+        }
+        else if (id==R.id.item2)
+        {
+            Intent LibraryIntent = new Intent(this, Library.class);
+            startActivity(LibraryIntent);
             return true;
         }
 
